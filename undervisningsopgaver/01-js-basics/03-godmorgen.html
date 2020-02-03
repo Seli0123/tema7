@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <script>
+        let tid = new Date().getHours();
+        //Hvis arealet er under 100, skal der stå: Arealet er for lille
+        if (tid >= 5 && tid < 10) {
+            besked = "Godmorgen";
+        }
+        //Er arealet mellem 100 og 200, skal der stå: Arealet er ok
+        if (tid >= 10 && tid < 18) {
+            besked = "Goddag";
+        }
+        //Er det større end (eller lig med)  200, skal der stå: Arealet er for stort
+        if (tid >= 18 && tid < 24) {
+            besked = "Godaften";
+        }
+
+        if (tid >= 24 && tid < 5) {
+            besked = "Godnat";
+        }
+
+        console.log(besked);
+
+    </script>
+
+
+</body>
+
+</html>
