@@ -7,17 +7,17 @@
     <title></title>
     <style>
         .firkant {
-            height: 200px;
-            width: 200px;
-            line-height: 200px;
+            height: 100px;
+            width: 100px;
+            line-height: 100px;
             text-align: center;
             background: green;
         }
 
         .cirkel {
-            height: 200px;
-            width: 200px;
-            line-height: 200px;
+            height: 100px;
+            width: 100px;
+            line-height: 100px;
             border-radius: 50%;
             text-align: center;
             background: red;
@@ -36,14 +36,15 @@
     <script>
         let firkantURL = `http://mabe-kea.dk/E19/pics/frog.png`;
         let cirkeltURL = `http://mabe-kea.dk/E19/pics/pig.png`;
-        /*Har tilføjet endnu et billede inde i cirklen som ikke overskriver det andet*/
-        let foxURL = `http://mabe-kea.dk/E19/pics/fox.png`;
 
+        document.addEventListener("DOMContentLoaded", start);
 
-        /*sætter tekst ind oven på figurene*/
-        document.querySelector(".firkant").innerHTML = `<img src = ${firkantURL} alt = >`;
-        document.querySelector(".cirkel").innerHTML = `<img src = ${cirkeltURL} alt = >`;
-        document.querySelector(".cirkel").innerHTML += `<img src = ${foxURL} alt = >`;
+        function start() {
+            console.log("start");
+            document.querySelector(".firkant").innerHTML = `<img src = ${firkantURL} alt = >`;
+            document.querySelector(".cirkel").innerHTML = `<img src = ${cirkeltURL} alt = >`;
+
+        }
 
     </script>
 </body>
