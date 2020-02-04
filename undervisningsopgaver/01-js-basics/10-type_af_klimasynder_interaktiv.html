@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<!--Det smarte her er, at man kan lave om på tallene om og så regner den selv resultatet-->
+
+<body>
+    <script>
+        let timer = 1;
+        let brændstof = 109;
+        let CO2 = timer * brændstof;
+
+        if (brændstof < 100) {
+            besked = `Du har fløjet ${timer} time og udledt ${CO2} kg CO2. Tæt på Thunberg`;
+        }
+        if (brændstof >= 100 && brændstof < 200) {
+            besked = `Du har fløjet ${timer} timer og udledt ${CO2} kg CO2. Ja ja, du behøver ikke at melde dig ud af Å!`;
+        }
+
+        if (brændstof >= 200 && brændstof < 600) {
+            besked = `Du har fløjet ${timer} timer og udledt ${CO2} kg CO2. Det er godt for turismen i nordeuropa.`;
+        }
+        if (brændstof >= 600) {
+            besked = `Du har fløjet ${timer} timer og udledt ${CO2} kg CO2. Nå ja vi kan jo altid kolonisere en anden planet`;
+        }
+
+        console.log(besked);
+
+    </script>
+</body>
+
+</html>
