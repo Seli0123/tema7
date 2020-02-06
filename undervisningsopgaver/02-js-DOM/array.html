@@ -24,12 +24,21 @@
 </head>
 
 <body>
-    <div id="display"></div>
+    <ul id="display"></ul>
 
     <script>
         let playlist = ["Sound of Music", "Dancing in the Rain", "What a wonderful world"];
         playlist.forEach(sang => {
-            document.querySelector("#display").innerHTML += `${sang} <br>`;
+            let element = document.createElement("li");
+            let minSang = document.createTextNode(sang);
+
+            element.appendChild(minSang);
+
+            document.querySelector("#display").appendChild(element);
+
+
+            /******* Kan også gøres på denne måde *******/
+            /*document.querySelector("#display").innerHTML += `${sang} <br>`;*/
         })
 
     </script>
