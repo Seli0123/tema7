@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+    </style>
+</head>
+
+<body>
+    <section id="data-container"></section>
+    <template>
+        <article id="dyr">
+            <h3></h3>
+            <p class="type"></p>
+            <p class="levested"></p>
+            <img src="" alt="">
+        </article>
+    </template>
+    <script>
+        document.addEventListener("DOMContentLoaded", visDyr);
+
+        let dyr = [
+
+            {
+                "navn": "gris",
+                "type": "pattedyr",
+                "levested": "svinefarme",
+                "billede": "http://mabe-kea.dk/E19/pics/pig.png"
+            },
+
+            {
+                "navn": "ræv",
+                "type": "pattedyr",
+                "levested": "skoven",
+                "billede": "http://mabe-kea.dk/E19/pics/fox.png"
+            },
+
+            {
+                "navn": "frø",
+                "type": "krybdyr",
+                "levested": "junglen",
+                "billede": "http://mabe-kea.dk/E19/pics/frog.png"
+            },
+
+            {
+                "navn": "sild",
+                "type": "fisk",
+                "levested": "havet",
+                "billede": "http://mabe-kea.dk/E19/pics/sild.jpg"
+            },
+
+            {
+                "navn": "krokodille",
+                "type": "krybdyr",
+                "levested": "floder",
+                "billede": "http://mabe-kea.dk/E19/pics/kroko.jpg"
+            }
+
+
+        ];
+
+        console.log(dyr);
+
+        function visDyr() {
+            const container = document.querySelector("#data-container");
+            const dyrTemplate = document.querySelector("template");
+            dyr.forEach(dyret => {
+                let klon = dyrTemplate.cloneNode(true).content;
+                klon.querySelector("h3").textContent = dyret.navn;
+                klon.querySelector(".type").textContent = dyret.type;
+                klon.querySelector(".levested").textContent = dyret.levested;
+                klon.querySelector("img").src = dyret.billede;
+                container.appendChild(klon);
+
+
+            })
+        }
+
+
+        /*const destination = document.querySelector("#dyr");
+        const fuldeNavn = `${dyr.navn} ${dyr.type}`;
+        destination.querySelector("h3").textContent = fuldeNavn;
+        destination.querySelector("p").textContent = dyr.levested;
+        destination.querySelector("img").src = dyr.billede;*/
+
+    </script>
+</body>
+
+</html>
