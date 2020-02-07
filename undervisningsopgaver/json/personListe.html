@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persondata</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        #data-container {
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-gap: 10px;
+            max-width: 1200px;
+
+        }
+
+
+        #personer {
+            border: solid 1px black;
+        }
+    </style>
+</head>
+
+<body>
+    <section id="data-container"></section>
+    <template>
+
+        <article id="personer">
+            <h2></h2>
+            <p class="efternavn"></p>
+            <p class="alder"></p>
+            <img src="" alt="">
+        </article>
+
+    </template>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", start);
+        const endpoint = "https://spreadsheets.google.com/feeds/list/1XWWbfWszD7f4jHqp51V_oT3pkHuR-ceEUw4YtrvK7F0/od6/public/values?alt=json";
+        let personer = [];
+
+        function start() {
+            loadData();
+        }
+
+
+        async function loadData() {
+            const response = await fetch(endpoint);
+            console.log(response);
+            personer = await response.json();
+            console.log(personer);
+            visPersoner();
+
+        }
+
+
+
+        function visPersoner() {
+            const container = document.querySelector("#data-container");
+            const personerTemplate = document.querySelector("template");
+            personer.feed.entry.forEach(personerne => {
+                let klon = personerTemplate.cloneNode(true).content;
+                klon.querySelector("h2").textContent = personerne.gsx$navn.$t;
+                klon.querySelector(".efternavn").textContent = personerne.gsx$efternavn.$t;
+                klon.querySelector(".alder").textContent = "alder " + personerne.gsx$alder.$t;
+                klon.querySelector("img").src = personerne.gsx$billede.$t;
+                container.appendChild(klon);
+            })
+        }
+
+
+        /*async function hentData() {
+            const response = await fetch("alledyr.json");
+            console.log(response);
+            dyr = await response.json();
+            console.log(dyr);
+            visDyr();
+        }*/
+
+
+
+        /*const destination = document.querySelector("#dyr");
+        const fuldeNavn = `${dyr.navn} ${dyr.type}`;
+        destination.querySelector("h3").textContent = fuldeNavn;
+        destination.querySelector("p").textContent = dyr.levested;
+        destination.querySelector("img").src = dyr.billede;*/
+    </script>
+</body></html>
+
+
+
+
+
+
+<!--* {
+            box-sizing: border-box;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 5px;
+            max-width: 1000px;
+            background: #ececec;
+        }
+
+        article {
+            border: 1px solid #000;
+            padding: 10px;
+        }-->
