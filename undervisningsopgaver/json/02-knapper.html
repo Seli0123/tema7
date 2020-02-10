@@ -29,10 +29,31 @@
             border: solid 1px black;
         }
 
+        nav {
+            display: flex;
+            justify-content: center;
+        }
+
+        button {
+            padding: 5px;
+
+        }
+
+        .valgt {
+            color: red;
+        }
+
     </style>
 </head>
 
 <body>
+
+    <nav>
+        <button class="filter valgt" data-køn="alle">Alle</button>
+        <button class="filter" data-køn="m">Mænd</button>
+        <button class="filter " data-køn="k">Kvinder</button>
+        <button class="filter" data-køn="andet">Andet</button>
+    </nav>
     <section id="data-container"></section>
     <template>
 
@@ -51,8 +72,11 @@
         const endpoint = "https://spreadsheets.google.com/feeds/list/1XWWbfWszD7f4jHqp51V_oT3pkHuR-ceEUw4YtrvK7F0/od6/public/values?alt=json";
         let personer = [];
 
+
         function start() {
             loadData();
+            addEventListenersToButton();
+
         }
 
 
@@ -68,36 +92,35 @@
 
 
         function visPersoner() {
-            const container = document.querySelector("#data-container");
+            container.innerHTML = "";
+            /*const container = document.querySelector("#data-container");*/
             const personerTemplate = document.querySelector("template");
             personer.feed.entry.forEach(personerne => {
-                let klon = personerTemplate.cloneNode(true).content;
-                klon.querySelector("h2").textContent = personerne.gsx$navn.$t;
-                klon.querySelector(".efternavn").textContent = personerne.gsx$efternavn.$t;
-                klon.querySelector(".alder").textContent = "alder " + personerne.gsx$alder.$t;
-                klon.querySelector("img").src = personerne.gsx$billede.$t;
-                container.appendChild(klon);
-
+                /*Henter bestemt køn - her kvinder*/
+                if (personerne.gsx$sex.$t == "alle") {
+                    let klon = personerTemplate.cloneNode(true).content;
+                    klon.querySelector("h2").textContent = personerne.gsx$navn.$t;
+                    klon.querySelector(".efternavn").textContent = personerne.gsx$efternavn.$t;
+                    klon.querySelector(".alder").textContent = "alder " + personerne.gsx$alder.$t;
+                    klon.querySelector("img").src = personerne.gsx$billede.$t;
+                    container.appendChild(klon);
+                }
             })
 
         }
 
 
-        /*async function hentData() {
-            const response = await fetch("alledyr.json");
-            console.log(response);
-            dyr = await response.json();
-            console.log(dyr);
-            visDyr();
-        }*/
+        function addEventListenersToButton() {
+            document.querySelectorAll(".filter").forEach(elm => {
+                elm.addEventListener("click", filtering);
+            })
+        }
 
-
-
-        /*const destination = document.querySelector("#dyr");
-        const fuldeNavn = `${dyr.navn} ${dyr.type}`;
-        destination.querySelector("h3").textContent = fuldeNavn;
-        destination.querySelector("p").textContent = dyr.levested;
-        destination.querySelector("img").src = dyr.billede;*/
+        function filtering() {
+            console.log("FILTER");
+            filter = this.dataset.sex;
+            visPersoner();
+        }
 
     </script>
 </body>

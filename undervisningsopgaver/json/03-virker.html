@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persondata</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        #data-container {
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-gap: 10px;
+            max-width: 1200px;
+
+        }
+
+
+        #personer {
+            border: solid 1px black;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+
+
+
+        }
+
+        button {
+            padding: 5px;
+            margin: 5px;
+            color: pink;
+            text-decoration: none;
+
+        }
+
+        .valgt {
+            background-color: darkgray;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>Alle</h1>
+
+    <nav>
+        <button class="filter" data-sex="alle">Alle</button>
+        <button class="filter" data-sex="m">Mænd</button>
+        <button class="filter " data-sex="k">Kvinder</button>
+        <button class="filter" data-sex="andet">Andet</button>
+    </nav>
+    <section id="data-container"></section>
+    <template>
+
+        <article id="personer">
+            <h2></h2>
+            <h3 class="efternavn"></h3>
+            <p class="alder"></p>
+            <img src="" alt="">
+        </article>
+
+    </template>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", start);
+        const container = document.querySelector("#data-container");
+        const endpoint = "https://spreadsheets.google.com/feeds/list/1XWWbfWszD7f4jHqp51V_oT3pkHuR-ceEUw4YtrvK7F0/od6/public/values?alt=json";
+        let personer = [];
+        let filter = "alle";
+
+
+        function start() {
+            loadData();
+            addEventListenersToButton();
+
+        }
+
+
+        async function loadData() {
+            const response = await fetch(endpoint);
+            console.log(response);
+            personer = await response.json();
+            console.log(personer);
+            visPersoner();
+
+        }
+
+
+
+        function visPersoner() {
+            container.innerHTML = "";
+            /*const container = document.querySelector("#data-container");*/
+            const personerTemplate = document.querySelector("template");
+            personer.feed.entry.forEach(personerne => {
+                /*Henter bestemt køn - her kvinder*/
+                if (filter == "alle" || filter == personerne.gsx$sex.$t) {
+                    let klon = personerTemplate.cloneNode(true).content;
+                    klon.querySelector("h2").textContent = personerne.gsx$navn.$t;
+                    klon.querySelector(".efternavn").textContent = personerne.gsx$efternavn.$t;
+                    klon.querySelector(".alder").textContent = "alder " + personerne.gsx$alder.$t;
+                    klon.querySelector("img").src = personerne.gsx$billede.$t;
+                    container.appendChild(klon);
+                }
+            })
+
+        }
+
+
+        function addEventListenersToButton() {
+            document.querySelectorAll(".filter").forEach(elm => {
+                elm.addEventListener("click", filtering);
+
+            })
+        }
+
+        function filtering() {
+            console.log("This", this.dataset.sex);
+            filter = this.dataset.sex;
+            /*console.log("FILTER");*/
+
+            document.querySelector("h1").textContent = this.textContent;
+
+
+
+            document.querySelectorAll(".filter").forEach(elm => {
+                elm.classList.remove("valgt");
+            })
+
+            this.classList.add("valgt");
+
+            visPersoner();
+        }
+
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+#menuknap {
+position: relative;
+width: 3rem;
+font-size: 2rem;
+font-family: 'Raleway', sans-serif;
+color: white;
+margin-left: 1rem;
+}
+
+#menu {
+list-style-type: none;
+background-color: #3d3835;
+min-width: 300px;
+z-index: 1;
+top: 1.9rem;
+position: absolute;
+
+}
+
+#menu a {
+font-family: 'Raleway', sans-serif;
+font-size: 1rem;
+text-decoration: none;
+color: white;
+line-height: 2rem;
+
+
+}
