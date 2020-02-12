@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persondata</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        #data-container {
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-gap: 10px;
+            max-width: 1200px;
+
+        }
+
+
+        #personer {
+            border: solid 1px black;
+        }
+
+        #detalje {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, .8);
+            overflow: scroll;
+        }
+
+        #detalje #luk {
+            position: fixed;
+            top: 0;
+            left: 0;
+            font-size: 4rem;
+            cursor: pointer;
+            margin: 1em;
+        }
+
+        #detalje .personerne {
+            width: 60vw;
+            min-height: 50vh;
+            margin: auto;
+            padding: 4rem;
+            background: white;
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <button class="filter valgt" data-køn="alle">Alle</button>
+        <button class="filter" data-køn="m">Mænd</button>
+        <button class="filter" data-køn="k">Kvinder</button>
+        <button class="filter" data-køn="andet">Andet</button>
+    </header>
+    <section id="data-container"></section>
+    <section id="detalje"> </section>
+    <template>
+
+
+        <section id="detalje" class="skjul">
+            <button id="luk">back</button>
+            <article class="personerne">
+                <h2 class="navn">Navn</h2>
+                <img src="http://ale-kea.dk/images/alan_thumb.JPG" alt="" class="profil-billede">
+            </article>
+        </section>
+
+
+        <article id="personer">
+            <h2></h2>
+            <p class="efternavn"></p>
+            <p class="alder"></p>
+            <img src="" alt="">
+        </article>
+
+    </template>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", start);
+        const endpoint = "https://spreadsheets.google.com/feeds/list/1XWWbfWszD7f4jHqp51V_oT3pkHuR-ceEUw4YtrvK7F0/od6/public/values?alt=json";
+        let personer = [];
+
+
+        function start() {
+            loadData();
+        }
+
+
+        async function loadData() {
+            const response = await fetch(endpoint);
+            console.log(response);
+            personer = await response.json();
+            console.log(personer);
+            visPersoner();
+
+        }
+
+
+
+        function visPersoner() {
+            const container = document.querySelector("#data-container");
+            const personerTemplate = document.querySelector("template");
+            personer.feed.entry.forEach(personerne => {
+                /*Henter bestemt køn - her kvinder*/
+                if (personerne.gsx$sex.$t == "k") {
+                    let klon = personerTemplate.cloneNode(true).content;
+                    klon.querySelector("h2").textContent = personerne.gsx$navn.$t;
+                    klon.querySelector(".efternavn").textContent = personerne.gsx$efternavn.$t;
+                    klon.querySelector(".alder").textContent = "alder " + personerne.gsx$alder.$t;
+                    klon.querySelector("img").src = personerne.gsx$billede.$t;
+                    klon.querySelector(".personerne").addEventListener("click", () => visDetalje(personerne));
+                    container.appendChild(klon);
+                }
+            })
+
+        }
+
+        function visDetalje(personerne) {
+            document.querySelector("#detalje").style.display = "block";
+
+            document.querySelector("#detalje .luk").addEventListener("click", skjulDetalje);
+
+            document.querySelector("#detalje h2").textContent = personerne.gsx$navn.$t;
+            document.querySelector("#detalje img").src = personerne.gsx$billede.$t;
+            document.querySelector("#detalje img").alt = `Portræt af ${personerne.gsx$billede.$t}`;
+
+        }
+
+        function skjulDetalje() {
+            document.querySelector("#detalje").style.display = "none";
+        }
+
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+<!--* {
+            box-sizing: border-box;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 5px;
+            max-width: 1000px;
+            background: #ececec;
+        }
+
+        article {
+            border: 1px solid #000;
+            padding: 10px;
+        }-->

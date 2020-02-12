@@ -1,0 +1,327 @@
+* {
+    box-sizing: border-box;
+}
+
+img {
+    width: 100%;
+}
+
+#data-container {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 10px;
+    max-width: 1200px;
+
+}
+
+
+#retter {
+    border: solid 1px black;
+}
+
+/*header {
+    background-color: #3d3835;
+    height: 200px;
+    width: 100%;
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+
+    background-color: white;
+    color: black;
+    opacity: 0.8;
+    padding-left: 20px;
+    padding-right: 20px;
+}*/
+
+
+nav {
+    display: flex;
+    justify-content: center;
+
+
+}
+
+button {
+    cursor: pointer;
+    border: solid black;
+    text-decoration: none;
+    border-radius: 20px;
+    width: 30vw;
+    height: 7vw;
+    font-size: 10px;
+    margin: 8px 5px;
+    background-color: transparent;
+    font-family: 'Raleway', sans-serif;
+    font-size: 13px;
+
+
+}
+
+.valgt {
+    color: lightcoral;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+}
+
+
+h1 {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+}
+
+h2 {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+}
+
+h3 {
+
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+}
+
+h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+}
+
+h5 {
+
+    font-family: 'Montserrat', sans-serif;
+    color: coral;
+    font-size: 25px;
+    text-decoration: none;
+}
+
+p {
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+}
+
+
+hr.line1 {
+    border: 1.5px solid #e24a2e;
+}
+
+
+
+/**** logo ******/
+.logo {
+    width: 170px;
+    height: 150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+
+
+}
+
+
+/****** pop-up *******/
+
+
+/********************************************/
+
+/********** velkommen box *********/
+
+
+
+
+#welcome {
+    text-align: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    */ height: 320px !important;
+
+
+
+}
+
+
+.welcome_box {
+
+    background-color: white;
+    color: black;
+    opacity: 0.9;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.welcome_img {
+    width: 100%;
+}
+
+
+/****** footer ******/
+
+
+
+#kontakt {
+
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    width: 100%;
+    background-color: whitesmoke;
+    margin-top: 5vw;
+    padding-left: 5vw;
+
+}
+
+.adresse,
+aside {
+    margin: 5px 10px;
+    padding: 20px;
+
+}
+
+
+.kontakt_titel {
+    font-size: 22px;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+}
+
+#kontakt p {
+    margin: 0 0 10px 0;
+    font-family: 'Raleway', sans-serif;
+    font-size: 15px;
+}
+
+.kontakt_img {
+    width: 5vw;
+}
+
+
+
+/******* DESKTOP MEDIACUERY *****/
+
+@media only screen and (min-width:768px) {
+
+    nav {
+        display: flex;
+        justify-content: center;
+
+
+    }
+
+    button {
+        cursor: pointer;
+        border: solid black;
+        text-decoration: none;
+        border-radius: 20px;
+        width: 10vw;
+        height: 2vw;
+        font-size: 10px;
+        margin: 8px 5px;
+        background-color: transparent;
+        font-family: 'Raleway', sans-serif;
+        font-size: 13px;
+
+
+    }
+
+    .valgt {
+        color: lightcoral;
+    }
+
+
+
+
+    /**** logo ******/
+    .logo {
+        width: 220px;
+        height: 200px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+
+
+
+    }
+
+    /********** velkommen box *********/
+
+
+
+    #welcome_p {
+        margin: 0 auto;
+        width: auto;
+
+        text-align: center;
+        font-family: 'Raleway', sans-serif;
+    }
+
+    #welcome h1 {
+        padding: 0px 10px;
+        margin: 10px 0px;
+    }
+
+
+
+    .welcome_box {
+        position: sticky;
+        bottom: 170px;
+        width: 100%;
+        padding: 10px;
+
+        background-color: white;
+        color: black;
+        opacity: 0.9;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+
+
+
+    /****** footer ******/
+
+    #kontakt {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        width: 100%;
+        background-color: whitesmoke;
+        margin-top: 5vw;
+        padding-left: 16vw;
+
+
+
+
+    }
+
+    .adresse,
+    aside {
+        width: 100%;
+        margin: 5px 10px;
+        padding: 20px;
+
+    }
+
+
+    .kontakt_titel {
+        font-size: 22px;
+        text-transform: uppercase;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    #kontakt p {
+        margin: 0 0 10px 0;
+        font-family: 'Raleway', sans-serif;
+    }
+
+    .kontakt_img {
+        width: 2vw;
+    }
+
+
+
+}
