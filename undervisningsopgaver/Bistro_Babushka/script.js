@@ -33,22 +33,17 @@ function visRetter() {
 
             let klon = retterTemplate.cloneNode(true).content;
 
-
-
             klon.querySelector("h3").textContent = "kategori: " + retterne.gsx$kategori.$t;
-
-
             klon.querySelector("img").src = `imgs/small/${retterne.gsx$billede.$t}-sm.jpg`;
             klon.querySelector("h4").textContent = retterne.gsx$kort.$t;
             klon.querySelector("h5").textContent = "pris: " + `${retterne.gsx$pris.$t
             },-`;
-
-
-
-
-
             container.appendChild(klon);
+            container.lastElementChild.addEventListener("click", () => {
+                visDetalje(retterne)
 
+
+            });
 
 
 
@@ -58,13 +53,29 @@ function visRetter() {
 }
 
 
+
 function addEventListenersToButton() {
     document.querySelectorAll(".filter").forEach(elm => {
         elm.addEventListener("click", filtering);
 
     })
+
 }
 
+function visDetalje(retterne) {
+    document.querySelector("#popup").style.display = "block";
+    document.querySelector("#luk").addEventListener("click", tilbage);
+    document.querySelector("#popup h3").textContent = "kategori: " + retterne.gsx$kategori.$t;
+    document.querySelector("#popup img").src = `imgs/large/${retterne.gsx$billede.$t}.jpg`;
+    document.querySelector("#popup h4").textContent = retterne.gsx$lang.$t;
+    document.querySelector("#popup h5").textContent = "pris: " + `${retterne.gsx$pris.$t
+            },-`;
+}
+
+function tilbage() {
+    document.querySelector("#popup").style.display = "none";
+    console.log(visRetter);
+}
 
 
 function filtering() {
